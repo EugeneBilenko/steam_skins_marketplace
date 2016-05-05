@@ -1,0 +1,33 @@
+
+
+add bitcoin wallet library - done
+add bitcoin table
+add bitcoin model
+join wallet for user
+
+add chat window on home page
+add socket.io, express packages - done
+
+add angular support
+//////////////////////////////////////
+expression for ranks
+
+$xp = 861; //example user has 861
+$result = 100; //first level
+$coefficient = 1.05; // customizable progression
+for ( $rank = 1;  $result <= $xp; $rank++  ){
+    $result = $result + $result*$coefficient;
+}
+echo $rank. "\n";
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+added config/roles.php
+added role middleware
+added role middleware group into Kernel
+
+added MainModel with validation functionality
+
+-------------------------------------
+Created new migrations in regarding with database model v2
+created new models
+added relations for models
