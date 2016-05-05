@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserTest extends TestCase
 {
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
     protected $testUser;
     protected $testWallet;
@@ -157,9 +157,7 @@ class UserTest extends TestCase
 
         $user1 = factory(\App\Models\User::class)->create();
         $testAccount1 = factory(\App\Models\SteamAccount::class, 1)->create();
-        $result = $testAccount1->assignUser($user1);
-
-        clm($result);
+        $testAccount1->assignUser($user1);
 
         $user2 = factory(\App\Models\User::class)->create();
 
@@ -174,5 +172,7 @@ class UserTest extends TestCase
             'steam_id'=>null,
         ]);
     }
+
+
 
 }

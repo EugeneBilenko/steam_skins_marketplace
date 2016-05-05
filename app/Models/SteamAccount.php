@@ -62,12 +62,9 @@ class SteamAccount extends MainModel {
 
         $oldUser = $this->user();
         if ($oldUser) {
-//            $oldUser = User::find($oldUser->id);
-//            $oldUser->steam_account_id = null;
             $oldUser->update(['steam_account_id' => null]);
         }
         $this->user()->save($user);
-
     }
 
     public function bot() {
@@ -76,7 +73,10 @@ class SteamAccount extends MainModel {
     }
 
     public function assignBot(Bot $bot) {
-
+        $oldBot = $this->bot();
+        if ($oldBot) {
+            $oldBot->update(['steam_account_id' => null]);
+        }
         $this->bot()->save($bot);
     }
 }

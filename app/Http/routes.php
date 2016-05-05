@@ -13,9 +13,9 @@
 
 Route::get('/', function () {
 
-    $user = factory(App\Models\User::class)->create();
+//    $user = factory(App\Models\User::class)->create();
 //    Event::fire(new \App\Events\SomeEvent($user));
-    event(new \App\Events\SomeEvent($user));
+//    event(new \App\Events\SomeEvent($user));
     return view('welcome');
 });
 

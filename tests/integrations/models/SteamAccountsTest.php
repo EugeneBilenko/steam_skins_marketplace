@@ -12,12 +12,6 @@ class SteamAccountTest extends TestCase {
     /** @test */
 
     public function add_account() {
-//        $account = new \App\Models\SteamAccount;
-//        $rules = $account->getRules();
-////        fwrite(STDERR, var_dump($rules));
-//        foreach($rules as $ruleName => $ruleValue) {
-//            $ruleArray = explode('|', $ruleValue);
-//        }
 
         $result = factory(\App\Models\SteamAccount::class, 1)->create();
 
@@ -56,9 +50,7 @@ class SteamAccountTest extends TestCase {
         \App\Models\SteamAccount::destroy($test_account->id);
 
         $this->setExpectedException('\Exception');
-        $account = \App\Models\SteamAccount::where('id', $test_account->id)->firstOrFail();
-
-//        fwrite(STDERR, var_dump($account));
+        \App\Models\SteamAccount::where('id', $test_account->id)->firstOrFail();
 
     }
 
@@ -86,7 +78,7 @@ class SteamAccountTest extends TestCase {
         $user = factory(\App\Models\User::class, 1)->create();
         $user2 = factory(\App\Models\User::class, 1)->create();
         $user3 = factory(\App\Models\User::class, 1)->create();
-//
+
         $test_account->assignUser($user);
         $test_account->assignUser($user2);
         $test_account->assignUser($user3);
@@ -110,14 +102,41 @@ class SteamAccountTest extends TestCase {
     public function assign_bot_to_steam() {
 
         $test_account = factory(\App\Models\SteamAccount::class, 1)->create();
-
         $bot = factory(\App\Models\Bot::class, 1)->create();
-//        clm($bot);
+
         $test_account->assignBot($bot);
 
         $this->seeInDatabase('bots', [
             'id' => $bot->id,
             'steam_account_id' => $test_account->id
         ]);
+    }
+
+    /** @test */
+    public function it_can_has_only_one_assigned_bot() {
+
+        $test_account = factory(\App\Models\SteamAccount::class, 1)->create();
+
+        $bot = factory(\App\Models\Bot::class, 1)->create();
+        $bot2 = factory(\App\Models\Bot::class, 1)->create();
+        $bot3 = factory(\App\Models\Bot::class, 1)->create();
+
+        $test_account->assignBot($bot);
+        $test_account->assignBot($bot2);
+        $test_account->assignBot($bot3);
+
+        $this->notSeeInDatabase('bots', [
+            'id' => $bot->id,
+            'steam_account_id' => $test_account->id
+        ]);
+        $this->notSeeInDatabase('bots', [
+            'id' => $bot2->id,
+            'steam_account_id' => $test_account->id
+        ]);
+        $this->seeInDatabase('bots', [
+            'id' => $bot3->id,
+            'steam_account_id' => $test_account->id
+        ]);
+
     }
 }

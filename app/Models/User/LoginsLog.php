@@ -7,7 +7,7 @@ use App\Models\User;
 
 class LoginsLog extends MainModel
 {
-    protected $table = 'user_referrals';
+    protected $table = 'user_logins_log';
     public $timestamps = true;
     protected $rules = [
         'user_id' => 'integer|required',
