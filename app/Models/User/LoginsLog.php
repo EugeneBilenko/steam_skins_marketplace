@@ -21,5 +21,4 @@ class LoginsLog extends MainModel
         return $this->belongsTo(User::class);
     }
 
-    //todo: get steam id from steam accounts by user id
 }

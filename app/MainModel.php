@@ -21,11 +21,6 @@ class MainModel extends Model {
 
     public static function validate($data) {
 
-//        if(empty($data)){
-//            //factory add empty data where seeding
-//            return true;
-//        }
-
 //        clm($data);
 
         // make a new validator object

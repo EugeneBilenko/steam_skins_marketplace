@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class SteamAccountTest extends TestCase {
 
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
     /** @test */
 

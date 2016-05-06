@@ -37,4 +37,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $this;
 //        return $user; // $this->signIn()->visit('/');
     }
+
+
 }

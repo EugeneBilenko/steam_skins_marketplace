@@ -31,3 +31,42 @@ added MainModel with validation functionality
 Created new migrations in regarding with database model v2
 created new models
 added relations for models
+
+
+Website (public pages)
+1. Homepage
+2. Login with Steam
+3. How to use
+4. About Us
+5. Contact Us / Social Media
+6. Support page
+7. Sitewide search
+8. Individual item pages
+9. Last completed orders/operations
+10. Public graph status
+
+User logged in pages (private)
+1. Exchange: Buy
+2. Exchange: Sell
+3. Website bank: Withdraw/Buy
+4. Website bank: Deposit/Sell
+5. Collector’s market: Buy
+6. Collector’s market: Sell
+7. Inventory module
+8. Referral system
+9. Buy credit packages
+10. Cashout
+11. Profile page
+12. Profile settings page
+13. Support tickets
+14. API
+
+
+Admin logged in pages (backend)
+1. Reporting module
+2. Users management module
+3. Prices management module
+4. Bot status/management
+5. Referrals management module
+6. Buy/sell orders modules
+7. Sitewide settings

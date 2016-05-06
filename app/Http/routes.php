@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
 
 //    $user = factory(App\Models\User::class)->create();
@@ -35,12 +36,8 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::post('/billing/store', 'BillingController@store');
 
-});
-
-Route::group(['middleware' =>['auth','role:admin']], function() {
-
-    Route::get('/test-admin', function () {
-        session()->flash('msg','You have access admin');
+    Route::get('/test-user', function () {
+        session()->flash('msg','You have access user');
         session()->flash('msg-type', 'info');
         return view('welcome');
     });
@@ -51,6 +48,16 @@ Route::group(['middleware' =>['auth','role:support']], function() {
 
     Route::get('/test-support', function () {
         session()->flash('msg','You have access support');
+        session()->flash('msg-type', 'info');
+        return view('welcome');
+    });
+
+});
+
+Route::group(['middleware' =>['auth','role:admin']], function() {
+
+    Route::get('/test-admin', function () {
+        session()->flash('msg','You have access admin');
         session()->flash('msg-type', 'info');
         return view('welcome');
     });

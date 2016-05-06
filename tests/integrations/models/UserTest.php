@@ -13,11 +13,14 @@ class UserTest extends TestCase
     protected $testWallet;
 
     public function setUp() {
+
         parent::setUp();
 
         $this->user = factory(\App\Models\User::class, 1)->create();
         $this->testWallet = factory(\App\Models\User\Credit::class)->create(['user_id'=>$this->user->id, 'credits' => 500]);
     }
+
+    //<----------Credits---------->
 
     /** @test */
 
@@ -94,6 +97,8 @@ class UserTest extends TestCase
         ]);
     }
 
+    //<----------Transactions---------->
+
     /** @test */
 
     public function it_can_make_a_transaction() {
@@ -150,7 +155,7 @@ class UserTest extends TestCase
 
         $this->assertEquals(600, $balance);
     }
-
+    //<----------Logs---------->
     /** @test */
 
     public function making_log_on_each_user_login() {
@@ -173,6 +178,129 @@ class UserTest extends TestCase
         ]);
     }
 
+    //<----------Ranks---------->
 
+    /** @test */
+
+    public function it_has_rank() {
+
+        $result = $this->user->getRank();
+        $this->assertEquals(true, is_integer($result));
+    }
+
+    /** @test */
+
+    public function it_can_up_the_rank() {
+
+        $user = factory(\App\Models\User::class)->create();
+        $user->rankXP = 100;
+        $user->save();
+        $user->addRankXP('800');
+
+        $result = $user->getRank();
+
+        $this->assertEquals(true, is_integer($result));
+        $this->assertEquals(true, ($result > 1));
+    }
+
+    /** @test */
+
+    public function it_can_loose_the_rank() {
+
+        $user = factory(\App\Models\User::class)->create();
+        $user->rankXP = 900;
+        $firstRank = $user->getRank();
+        $user->save();
+        $user->takeRankXP('700');
+
+        $secondRank = $user->getRank();
+
+        $this->assertEquals(true, is_integer($secondRank));
+        $this->assertEquals(true, ($secondRank < $firstRank));
+    }
+
+    //<----------Permissions(Roles)---------->
+    /** @test */
+
+    public function user_can_see_users_pages(){
+
+        $user = factory(\App\Models\User::class)->create();
+        $user->role = 'user';
+        $user->save();
+        $this->signIn($user)->visit('/test-user')->see('You have access user');
+
+    }
+
+    /** @test */
+
+    public function user_can_NOT_see_support_pages(){
+
+        $user = factory(\App\Models\User::class)->create();
+        $user->role = 'user';
+        $user->save();
+        $this->signIn($user)
+            ->visit('/test-support')
+            ->dontSee('You have access support')
+            ->see('Permission denied');
+
+    }
+
+    /** @test */
+
+    public function user_can_NOT_see_admin_pages() {
+
+        $user = factory(\App\Models\User::class)->create();
+        $user->role = 'user';
+        $user->save();
+        $this->signIn($user)
+            ->visit('/test-admin')
+            ->dontSee('You have access admin')
+            ->see('Permission denied');
+    }
+
+    /** @test */
+
+    public function support_it_can_see_users_pages(){
+
+        $user = factory(\App\Models\User::class)->create();
+        $user->role = 'support';
+        $user->save();
+        $this->signIn($user)->visit('/test-user')->see('You have access user');
+
+    }
+
+    /** @test */
+
+    public function support_it_can_see_support_pages(){
+
+        $user = factory(\App\Models\User::class)->create();
+        $user->role = 'support';
+        $user->save();
+        $this->signIn($user)->visit('/test-support')->see('You have access support');
+
+    }
+
+    /** @test */
+
+    public function support_can_NOT_see_admin_pages() {
+
+        $user = factory(\App\Models\User::class)->create();
+        $user->role = 'support';
+        $user->save();
+        $this->signIn($user)
+            ->visit('/test-admin')
+            ->dontSee('You have access admin')
+            ->see('Permission denied');
+    }
+
+    public function admin_admin_pages_and_users_and_supports_pages(){
+
+        $user = factory(\App\Models\User::class)->create();
+        $user->role = 'admin';
+        $user->save();
+        $this->signIn($user)->visit('/test-user')->see('You have access user');
+        $this->signIn($user)->visit('/test-support')->see('You have access support');
+        $this->signIn($user)->visit('/test-admin')->see('You have access admin');
+    }
 
 }

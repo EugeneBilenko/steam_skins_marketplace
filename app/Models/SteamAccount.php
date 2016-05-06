@@ -30,6 +30,7 @@ class SteamAccount extends MainModel {
         'loc_state_code' => 'string',
         'loc_city_id' => 'string',
     ];
+
     protected $fillable = [
         //public data
         'trade_url',

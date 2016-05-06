@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User\Credit;
 use App\Models\User\Transaction;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
 
 //use Illuminate\Validation\Validator;
@@ -135,5 +136,23 @@ class User extends Authenticatable
         }
     }
 
+    public function getRank() {
+
+        $xp = $this->rankXP;
+        $need = Option::getOption('first_rank') ? : Config::get('options')['default']['first_rank']; //first level
+        $coefficient = Option::getOption('coefficient') ? : Config::get('options')['default']['coefficient']; // customizable progression
+        for( $rank = 1;  $need <= $xp; $rank++ ){
+            $need = $need + $need*$coefficient;
+        }
+        return $rank;
+    }
+
+    public function addRankXP($xp) {
+        $this->increment('rankXP', $xp);
+    }
+
+    public function takeRankXP($xp) {
+        $this->decrement('rankXP', $xp);
+    }
 
 }
