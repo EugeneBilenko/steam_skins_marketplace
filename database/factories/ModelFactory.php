@@ -53,3 +53,30 @@ $factory->define(App\Models\User\Credit::class, function (Faker\Generator $faker
 
     ];
 });
+
+$factory->define(App\Models\User\Credit::class, function (Faker\Generator $faker) {
+    file
+    return [
+        'market_price' => 'string|required',
+        'name' => 'string',
+        'defindex' => 'integer',
+        'item_class' => 'string|required',
+        'item_type_name' => 'string|required',
+        'item_name' => 'string|required',
+        'item_description' => 'string|required',
+        'proper_name' => 'string|required',
+        'item_quality' => 'integer|required',
+        'image_inventory' => 'string|required',
+        'min_ilevel' => 'integer|required',
+        'max_ilevel' => 'integer|required',
+        'image_url' => 'string|required',
+        'image_url_large' => 'string|required',
+        'craft_class' => 'string|required',
+        'craft_material_type' => 'string|required',
+        'capabilities_paintable' => 'boolean|required',
+        'capabilities_nameable' => 'boolean|required',
+        'capabilities_can_sticker' => 'boolean|required',
+        'capabilities_can_stattrack_swap' => 'boolean|required',
+        'attributes' => 'string|required',
+    ];
+});

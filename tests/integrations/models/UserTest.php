@@ -302,5 +302,4 @@ class UserTest extends TestCase
         $this->signIn($user)->visit('/test-support')->see('You have access support');
         $this->signIn($user)->visit('/test-admin')->see('You have access admin');
     }
-
 }
