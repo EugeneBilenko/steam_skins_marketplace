@@ -14,27 +14,27 @@ class CreateFullItemsBaseTable extends Migration
     {
         Schema::create('full_items_base', function(Blueprint $table) {
             $table->increments('id');
+            $table->integer('appid');
+            $table->integer('classid');
+            $table->integer('instanceid');
+            $table->string('icon_url');
+            $table->string('icon_url_large');
+            $table->string('icon_drag_url');
             $table->string('market_price');
             $table->string('name');
-            $table->integer('defindex');
-            $table->string('item_class');
-            $table->string('item_type_name');
-            $table->string('item_name');
-            $table->string('item_description');
-            $table->string('proper_name');
-            $table->integer('item_quality');
-            $table->string('image_inventory');
-            $table->integer('min_ilevel');
-            $table->integer('max_ilevel');
-            $table->string('image_url');
-            $table->string('image_url_large');
-            $table->string('craft_class');
-            $table->string('craft_material_type');
-            $table->boolean('capabilities_paintable');          //capabilities->paintable
-            $table->boolean('capabilities_nameable');           //capabilities->nameable
-            $table->boolean('capabilities_can_sticker');        //capabilities->can_sticker
-            $table->boolean('capabilities_can_stattrack_swap'); //capabilities->can_stattrack_swap
-            $table->text('attributes');
+            $table->string('market_hash_name');
+            $table->string('market_name');
+            $table->string('name_color');
+            $table->string('background_color');
+            $table->string('type');
+            $table->boolean('tradable');
+            $table->boolean('marketable');
+            $table->boolean('commodity');
+            $table->string('market_tradable_restriction');
+            $table->string('descriptions');
+            $table->string('actions');
+            $table->string('market_actions');
+            $table->string('tags');
             $table->timestamps();
         });
     }

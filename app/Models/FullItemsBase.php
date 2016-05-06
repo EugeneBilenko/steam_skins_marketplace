@@ -31,6 +31,7 @@ class FullItemsBase extends MainModel
         'capabilities_can_stattrack_swap' => 'boolean|required',
         'attributes' => 'string|required',
     ];
+
     protected $fillable = [
         'unique_steam_key',
         'first_owner_users_id',
@@ -42,19 +43,13 @@ class FullItemsBase extends MainModel
         'price',
     ];
 
+    public function items() {
 
-    public function user() {
-
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Item::class);
     }
 
-    public function bot() {
+    public function finishedBillings() {
 
-        return $this->belongsTo(Bot::class);
-    }
-
-    public function fullItem() {
-
-        return $this->belongsTo(FullItemsBase::class);
+        return $this->hasMany(FinishedBillings::class);
     }
 }

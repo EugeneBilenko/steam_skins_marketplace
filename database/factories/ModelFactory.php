@@ -54,29 +54,28 @@ $factory->define(App\Models\User\Credit::class, function (Faker\Generator $faker
     ];
 });
 
-$factory->define(App\Models\User\Credit::class, function (Faker\Generator $faker) {
-    file
+$factory->define(\App\Models\FullItemsBase::class, function (Faker\Generator $faker) {
     return [
-        'market_price' => 'string|required',
-        'name' => 'string',
-        'defindex' => 'integer',
-        'item_class' => 'string|required',
-        'item_type_name' => 'string|required',
-        'item_name' => 'string|required',
-        'item_description' => 'string|required',
-        'proper_name' => 'string|required',
-        'item_quality' => 'integer|required',
-        'image_inventory' => 'string|required',
-        'min_ilevel' => 'integer|required',
-        'max_ilevel' => 'integer|required',
-        'image_url' => 'string|required',
-        'image_url_large' => 'string|required',
-        'craft_class' => 'string|required',
-        'craft_material_type' => 'string|required',
-        'capabilities_paintable' => 'boolean|required',
-        'capabilities_nameable' => 'boolean|required',
-        'capabilities_can_sticker' => 'boolean|required',
-        'capabilities_can_stattrack_swap' => 'boolean|required',
-        'attributes' => 'string|required',
+        'market_price' => '100000.99 - 200000.99',
+        'name' => 'test_item_' . str_random(5),
+        'defindex' => 1,
+        'item_class' => 'test_item_class_1',
+        'item_type_name' => 'test_item_type_1',
+        'item_name' => 'test_item_name',
+        'item_description' =>  'test_item_description',
+        'proper_name' => 'test_item_proper',
+        'item_quality' => 1,
+        'image_inventory' => 'http://',
+        'min_ilevel' => 1,
+        'max_ilevel' => 100,
+        'image_url' => 'http://',
+        'image_url_large' => 'http://',
+        'craft_class' => 'test_craft_class',
+        'craft_material_type' => 'test_material',
+        'capabilities_paintable' => false,
+        'capabilities_nameable' => false,
+        'capabilities_can_sticker' => false,
+        'capabilities_can_stattrack_swap' => false,
+        'attributes' => 'test_attrs',
     ];
 });

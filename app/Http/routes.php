@@ -17,6 +17,10 @@ Route::get('/', function () {
 //    $user = factory(App\Models\User::class)->create();
 //    Event::fire(new \App\Events\SomeEvent($user));
 //    event(new \App\Events\SomeEvent($user));
+//    $example = file_get_contents('http://steamcommunity.com/id/samalexcs/inventory/json/730/2');
+//    $fp = fopen(__DIR__ . '/data.json', 'w');
+//    fwrite($fp, $example);
+//    fclose($fp);
     return view('welcome');
 });
 

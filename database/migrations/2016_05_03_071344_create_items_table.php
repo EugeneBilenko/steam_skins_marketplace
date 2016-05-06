@@ -12,21 +12,22 @@ class CreateItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table)
+        {
             $table->increments('id');
-            $table->string('name');//allowed: bank, trade
+            $table->string('name')->nullable();//allowed: bank, trade
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('bot_id')->unsigned();
+            $table->integer('bot_id')->unsigned()->nullable();
             $table->foreign('bot_id')->references('id')->on('bots');
             $table->integer('full_items_base_id')->unsigned();
             $table->foreign('full_items_base_id')->references('id')->on('full_items_base');
             $table->string('unique_steam_key');
-            $table->string('unique_item_attr');
+            $table->integer('inventory_position');
+            $table->string('unique_item_attr')->nullable();
             $table->string('status');
             $table->integer('price')->nullable();
             $table->timestamps();
-
         });
     }
 

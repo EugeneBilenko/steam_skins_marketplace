@@ -48,4 +48,10 @@ class Item extends MainModel
 
         return $this->hasMany(Billing::class);
     }
+
+    public function setOwner(User $user) {
+
+        $this->user()->associate($user);
+        $this->save();
+    }
 }
