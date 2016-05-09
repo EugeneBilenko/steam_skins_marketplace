@@ -18,6 +18,8 @@ class CreateOptionsTable extends Migration
             $table->string('value');
             $table->timestamps();
         });
+
+        \App\Models\Option::resetOptions();
     }
 
     /**

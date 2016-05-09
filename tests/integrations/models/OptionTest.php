@@ -174,6 +174,7 @@ class OptionTest extends TestCase {
         $this->assertEquals(0, $diff);
 
         \App\Models\Option::truncate();
+        $option->resetOptions();
 
     }
 

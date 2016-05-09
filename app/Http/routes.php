@@ -14,6 +14,10 @@
 
 Route::get('/', function () {
 
+//    $class = new \App\Http\Controllers\ItemsController();
+//    $class->createItemsExamples();
+
+//
 //    $user = factory(App\Models\User::class)->create();
 //    Event::fire(new \App\Events\SomeEvent($user));
 //    event(new \App\Events\SomeEvent($user));
@@ -22,6 +26,10 @@ Route::get('/', function () {
 //    fwrite($fp, $example);
 //    fclose($fp);
     return view('welcome');
+});
+
+Route::get('csrf', function() {
+    return Session::token();
 });
 
 Route::auth();
@@ -34,11 +42,13 @@ Route::get('/blockchain-test', 'Blockchain\BlockchainController@testBlockchaineC
 
 Route::group(['middleware' => 'auth'], function() {
 
-    Route::get('/billing', 'BillingController@index');
-
-    Route::get('/billing/{ID}', 'BillingController@show');
-
-    Route::post('/billing/store', 'BillingController@store');
+    Route::resource('billing', 'BillingController');
+//
+//    Route::get('/billing', 'BillingController@index');
+//
+//    Route::get('/billing/{ID}', 'BillingController@show');
+//
+//    Route::post('/billing/store', 'BillingController@store');
 
     Route::get('/test-user', function () {
         session()->flash('msg','You have access user');
@@ -57,8 +67,11 @@ Route::group(['middleware' =>['auth','role:support']], function() {
     });
 
 });
+Route::resource('options', 'OptionsController');
 
 Route::group(['middleware' =>['auth','role:admin']], function() {
+
+
 
     Route::get('/test-admin', function () {
         session()->flash('msg','You have access admin');

@@ -10,7 +10,7 @@ class Bot extends MainModel
     protected $table = "bots";
     public $timestamps = true;
     protected $rules = [
-        'type' => 'string|required',
+        'type' => 'string',
         'steam_account_id' => 'integer|unique:bots',
         'code_2fa' => 'string',
     ];

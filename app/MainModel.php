@@ -80,32 +80,4 @@ class MainModel extends Model {
         }
     }
 
-//    public function saveOrFail(array $params = []) {
-//
-//        if (self::validate($params)) {
-//            return parent::saveOrFail($params);
-//        } else {
-//            return self::errors();
-//        }
-//    }
-
-
 }
-/*
- // get the POST data
-$new = Input::all();
-
-// create a new model instance
-$model = new User();
-
-// attempt validation
-if ($model->validate($new))
-{
-    // success code
-}
-else
-{
-    // failure, get errors
-    $errors = $model->errors();
-}
- */

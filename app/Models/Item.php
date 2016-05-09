@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\MainModel;
+use Mockery\CountValidator\Exception;
 
 class Item extends MainModel
 {
     protected $table = "items";
     public $timestamps = true;
     protected $rules = [
-        'name' => 'string|required',
+        'name' => 'string',
         'user_id' => 'integer|required',
         'bot_id' => 'integer',
         'full_items_base_id' => 'integer|required',
@@ -39,7 +40,7 @@ class Item extends MainModel
         return $this->belongsTo(Bot::class);
     }
 
-    public function fullItem() {
+    public function template() {
 
         return $this->belongsTo(FullItemsBase::class);
     }
@@ -51,7 +52,45 @@ class Item extends MainModel
 
     public function setOwner(User $user) {
 
+//        if($this->inventoredCount($user) >= Option::getOption('inventory_size')) {
+//            throw new Exception('to mach');
+//            return;
+//        }
+
+
+//        clm($this->inventoredCount($user));
+//        clm("\n");
+//        clm(Option::getOption('inventory_size'));
+
         $this->user()->associate($user);
+        $this->save();
+    }
+
+    public function inventoredCount($user){
+
+        return $this->where('user_id', '=', $user->id)->count();
+    }
+
+    public function setBot(Bot $bot) {
+
+//        clm($bot);
+        $this->bot()->associate($bot);
+        $this->save();
+    }
+
+    public function setTemplate(FullItemsBase $template) {
+
+        $this->template()->associate($template);
+        $this->save();
+    }
+
+    public function setPrice($price) {
+
+        if(!is_integer($price)){
+            return false;
+        }
+
+        $this->price = $price;
         $this->save();
     }
 }

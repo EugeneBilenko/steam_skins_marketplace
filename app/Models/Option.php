@@ -35,6 +35,20 @@ class Option extends MainModel {
         return false;
     }
 
+//    public static function getOptions($key) {
+//
+//        if(empty($key) || !is_string($key)) {
+//
+//            throw new Exception('\Exception');
+//        }
+//
+//        $result = self::where('key' , '=', $key)->first();
+//        if(isset($result->value)){
+//            return $result->value;
+//        }
+//        return false;
+//    }
+
     public function removeOption($key) {
 
         if(empty($key) || !is_string($key)) {
@@ -43,7 +57,7 @@ class Option extends MainModel {
         self::where('key' , '=', $key)->delete();
     }
 
-    public function resetOptions() {
+    public static function resetOptions() {
 
         self::truncate();
         self::setDefaultOptions();
