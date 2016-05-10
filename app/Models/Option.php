@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\MainModel;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\MessageBag;
 use Mockery\CountValidator\Exception;
 
 class Option extends MainModel {
@@ -11,21 +12,32 @@ class Option extends MainModel {
     protected $table = "options";
     public $timestamps = true;
     protected $rules = [
-        'key' => 'string|unique:options|required|max:255',
+        'key' => 'string|unique:options,id|required|max:255',
         'value' => 'required'
     ];
     protected $fillable = ['key','value'];
 
-    public function setOption(array $params = []) {
+    public static function setOption($key, $value) {
+        $option = self::where('key' ,'=', $key)->first();
+        if($option){
+           return $option->update(['value'=>$value]);
+        }
+        $bag = new MessageBag;
+        self::$errors = $bag->add('error', 'Option not found');
+        return self::errors();
+    }
 
-        return parent::firstOrCreate($params);
+    public function createOption(array $params = []) {
+
+        return parent::create($params);
     }
 
     public static function getOption($key) {
 
         if(empty($key) || !is_string($key)) {
-
-            throw new Exception('\Exception');
+            $bag = new MessageBag;
+            self::$errors = $bag->add('error', 'Option not found');
+            return self::errors();
         }
 
         $result = self::where('key' , '=', $key)->first();

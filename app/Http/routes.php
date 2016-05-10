@@ -42,7 +42,7 @@ Route::get('/blockchain-test', 'Blockchain\BlockchainController@testBlockchaineC
 
 Route::group(['middleware' => 'auth'], function() {
 
-    Route::resource('billing', 'BillingController');
+//    Route::resource('billing', 'BillingController');
 //
 //    Route::get('/billing', 'BillingController@index');
 //
@@ -67,11 +67,10 @@ Route::group(['middleware' =>['auth','role:support']], function() {
     });
 
 });
+
 Route::resource('options', 'OptionsController');
 
 Route::group(['middleware' =>['auth','role:admin']], function() {
-
-
 
     Route::get('/test-admin', function () {
         session()->flash('msg','You have access admin');
@@ -79,4 +78,8 @@ Route::group(['middleware' =>['auth','role:admin']], function() {
         return view('welcome');
     });
 
+});
+
+Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
+//    Route::post('/short', 'UrlMapperController@store');
 });

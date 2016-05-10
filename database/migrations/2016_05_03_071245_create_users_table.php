@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('api_key')->nullable();//allowed : user, support, admin
             $table->integer('steam_account_id')->unsigned()->nullable();
             $table->foreign('steam_account_id')->references('id')->on('steam_accounts');
-
+            $table->string('api_token', 60);
             $table->rememberToken();
             $table->timestamps();
         });
