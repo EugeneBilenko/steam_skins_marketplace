@@ -10,8 +10,7 @@ class CreateBotsTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('bots', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');//allowed: bank, trade
@@ -29,8 +28,7 @@ class CreateBotsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::table('bots', function($table)
         {
             $table->dropForeign(['steam_account_id']);

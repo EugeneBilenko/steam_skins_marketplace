@@ -9,8 +9,7 @@ class ItemsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
 //        $items = [];
 //        $itemsCount = 10;
 //        $oBot = App\Models\User::where('name', 'test_bot')->first();

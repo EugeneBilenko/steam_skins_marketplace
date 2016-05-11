@@ -1,16 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: developer
- * Date: 10.05.16
- * Time: 11:15
+ * We can hide or rename fields in transform()
  */
 
 namespace  App\Advanced\Transformers;
 
-
-abstract class Transformer
-{
+abstract class Transformer {
 
     public function transformCollection(array $items){
         return array_map([$this, 'transform'], $items);

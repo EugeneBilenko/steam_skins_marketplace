@@ -10,8 +10,7 @@ class CreateUserReferrals extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('user_referrals', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();                         //the owner of the referral code
@@ -27,8 +26,7 @@ class CreateUserReferrals extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::table('user_referrals', function($table)
         {
             $table->dropForeign(['user_id']);

@@ -9,8 +9,7 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
 
         $test_users = [
             0 => [

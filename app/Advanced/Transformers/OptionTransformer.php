@@ -1,22 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: developer
- * Date: 10.05.16
- * Time: 11:18
- */
 
 namespace App\Advanced\Transformers;
 
+class OptionTransformer extends Transformer {
 
+    /**
+     * Hide created_at and updated_at
+     * @param $option
+     * @return array
+     */
 
-class OptionTransformer extends Transformer
-{
-    public function transform($lesson) {
+    public function transform($option) {
         return [
-            'key' => $lesson['key'],
-            'value' => $lesson['value'],
+            'id' => $option['id'],
+            'key' => $option['key'],
+            'value' => $option['value'],
         ];
     }
-
 }

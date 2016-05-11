@@ -10,8 +10,7 @@ class CreateSteamAccountsTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('steam_accounts', function(Blueprint $table) {
             $table->increments('id');
 //            $table->string('api_key');
@@ -44,8 +43,7 @@ class CreateSteamAccountsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('steam_accounts');
     }
 }

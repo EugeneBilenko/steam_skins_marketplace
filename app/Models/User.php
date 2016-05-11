@@ -33,7 +33,15 @@ class User extends Authenticatable
     public static $errors;
 
     protected $fillable = [
-        'name', 'email', 'password','role','rankXP','referral_code','api_key','steam_account_id','remember_token'
+        'name',
+        'email',
+        'password',
+        'role',
+        'rankXP',
+        'referral_code',
+        'api_key',
+        'steam_account_id',
+        'remember_token'
     ];
 
     /**

@@ -35,7 +35,8 @@
     },
     "autoload-dev": {
         "classmap": [
-            "tests/TestCase.php"
+            "tests/TestCase.php",
+            "tests/integrations/ApiTester.php"
         ],
         "files": [
             "app/CustomHelpers/helper.php"

@@ -20,44 +20,47 @@ class ApiController extends Controller
 
         return $this->statusCode;
     }
+
     public function setStatusCode($statusCode) {
 
         $this->statusCode = $statusCode;
         return $this;
     }
+
     public function respondNotFound($message = 'Not found') {
 
         return $this->setStatusCode(404)->respondWithError($message);
-
     }
+
     public function respondInternalError($message = 'Internal Error') {
 
         return $this->setStatusCode(500)->respondWithError($message);
-
     }
 
-    public function respondWithError($message){
+    public function respondWithError($message) {
+
+        if(isset($message['error'])) {
+            $message = $message['error'];
+        }
         return $this->respond([
             'data' => null,
             'error' => [
                 'message' => $message,
                 'status_code' => $this->getStatusCode(),
             ]
-
         ]);
     }
 
     public function respond($data, $headers = []) {
 
-        $data['access'] = true;
+        if(!isset($data['access'])) {
+            $data['access'] = true;
+        }
 
         return Response::json($data, $this->getStatusCode(), $headers);
-
     }
 
     public function respondWithPagination(LengthAwarePaginator $paginator, $data) {
-
-        $data['access'] = true;
 
         $aPaginator = [
             'total' => $paginator->total(),
@@ -65,6 +68,7 @@ class ApiController extends Controller
             'current_page' => $paginator->currentPage(),
             'limit' => $paginator->perPage(),
         ];
+
         return $this->respond([
             'data' => $data,
             'paginator' => $aPaginator
@@ -76,7 +80,6 @@ class ApiController extends Controller
 
         return $this->setStatusCode(200)->respond([
             'message' => $message,
-            'access' => true
         ]);
     }
 

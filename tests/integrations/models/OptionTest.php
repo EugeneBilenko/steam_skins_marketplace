@@ -105,7 +105,7 @@ class OptionTest extends TestCase {
         ];
 
         foreach($test_options as $test_option){
-           $result = $option->setOption($test_option);
+           $result = $option->setOption($test_option['key'], $test_option['value']);
             if(method_exists($result,'messages') && !empty($result->messages())){
 //                fwrite(STDERR, var_dump($result->messages()));
             }
@@ -133,9 +133,6 @@ class OptionTest extends TestCase {
 
         $created = $this->addOptions(20);
         $list = \App\Models\Option::listOptions(20,0);
-
-//        fwrite(STDERR, var_dump(count($list)));
-//        fwrite(STDERR, var_dump(count($created)));
         $this->assertEquals(count($list), count($created));
 
     }
@@ -145,14 +142,16 @@ class OptionTest extends TestCase {
     public function remove_option() {
 
         $option = new \App\Models\Option;
-        $option->create(['key' => 'foo', 'value' => 'bar']);
-        $foo = $option->getOption('foo');
+        $option->create(['key' => 'test_foo', 'value' => 'test_bar']);
+        $foo = $option->getOption('test_foo');
 //        fwrite(STDERR, var_dump($foo));
-        $this->assertEquals('bar', $foo);
-        $option->removeOption('foo');
-//        $this->setExpectedException('\Exception');
-        $foo = $option->getOption('foo');
-        $this->assertFalse($foo);
+        $this->assertEquals('test_bar', $foo);
+        $option->removeOption('test_foo');
+        $foo = $option->getOption('test_foo');
+        $this->dontSeeInDatabase('options', [
+            'key' => 'test_foo',
+        ]);
+//        $this->assertFalse($foo);
     }
 
     /** @test */

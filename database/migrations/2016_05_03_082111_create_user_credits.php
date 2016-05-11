@@ -10,8 +10,7 @@ class CreateUserCredits extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('user_credits', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
@@ -26,8 +25,7 @@ class CreateUserCredits extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::table('user_credits', function($table)
         {
             $table->dropForeign(['user_id']);

@@ -9,8 +9,7 @@ class SteamAccountsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
 //        $table->increments('id');
 //        $table->integer('user_id')->unsigned();
 //        $table->foreign('user_id')->references('id')->on('users');

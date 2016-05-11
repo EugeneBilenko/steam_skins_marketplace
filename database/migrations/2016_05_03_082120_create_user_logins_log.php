@@ -10,8 +10,7 @@ class CreateUserLoginsLog extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('user_logins_log', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
@@ -26,8 +25,7 @@ class CreateUserLoginsLog extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::table('user_logins_log', function($table)
         {
             $table->dropForeign(['user_id']);

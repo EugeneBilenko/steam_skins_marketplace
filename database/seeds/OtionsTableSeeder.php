@@ -9,8 +9,7 @@ class OptionsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
 
         $option = new \App\Models\Option;
         $option->resetOptions();

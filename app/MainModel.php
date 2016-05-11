@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 
 //use Illuminate\Validation\Validator;
 
@@ -12,10 +13,12 @@ class MainModel extends Model {
     protected static $validationRules = [];
 
     protected static $errors;
+    protected static $bag;
 
     public function __construct(array $attributes = []){
 
         static::$validationRules = $this->rules;
+        static::$bag = new MessageBag;
         return parent::__construct($attributes);
     }
 

@@ -15,15 +15,14 @@ class RoleMiddleware
      * @param  string  $role
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
-    {
+    public function handle($request, Closure $next, $role) {
         $roles = Config::get('roles');
 
         $userRole = $request->user()->role;
-        if(!isset($roles[$role]['level'])){
+        if(!isset($roles[$role]['level'])) {
             return $this->redirect($request,'Role "'. $role . '" not configured');
         }
-        if(!isset($roles[$userRole]['level'])){
+        if(!isset($roles[$userRole]['level'])) {
             return $this->redirect($request,'User role "'. $userRole . '" not configured');
         }
         if ($roles[$userRole]['level'] < $roles[$role]['level']) {
@@ -34,7 +33,7 @@ class RoleMiddleware
         return $next($request);
     }
 
-    private function redirect($request, $message){
+    private function redirect($request, $message) {
 
         session()->flash('msg',$message);
         session()->flash('msg-type', 'warning');

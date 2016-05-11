@@ -10,8 +10,7 @@ class CreateFullItemsBaseTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('full_items_base', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('appid');
@@ -44,8 +43,7 @@ class CreateFullItemsBaseTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('full_items_base');
     }
 }

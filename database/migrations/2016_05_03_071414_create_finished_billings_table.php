@@ -10,8 +10,7 @@ class CreateFinishedBillingsTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('finished_billings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('unique_steam_key');//allowed: bank, trade
@@ -35,8 +34,7 @@ class CreateFinishedBillingsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::table('finished_billings', function($table)
         {
             $table->dropForeign(['first_owner_users_id']);

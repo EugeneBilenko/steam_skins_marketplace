@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FullItemsBase;
+
 use App\Models\Item;
 use App\Models\User;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Models\FullItemsBase;
 
 class ItemsController extends Controller
 {
@@ -16,8 +16,7 @@ class ItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
 
         return view('welcome');
     }
@@ -27,8 +26,7 @@ class ItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -38,8 +36,7 @@ class ItemsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -49,8 +46,7 @@ class ItemsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -60,8 +56,7 @@ class ItemsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -72,8 +67,7 @@ class ItemsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -83,18 +77,16 @@ class ItemsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 
-    public function createItemsExamples()
-    {
+    public function createItemsExamples() {
         $user = factory(User::class)->create();
 
 
         list($itemsExample, $itemsTemplatesExample) = $this->getExamplesData();
-        foreach($itemsExample as $id => $item){
+        foreach($itemsExample as $id => $item) {
             $oTemplate = new FullItemsBase();
             $oTemplate->market_price = 999;
             $result = $oTemplate->create($itemsTemplatesExample[$id]);
@@ -118,12 +110,12 @@ class ItemsController extends Controller
 
         $items = $itemsTemplates = [];
         $data = json_decode($data, true);
-        if(json_last_error() !== JSON_ERROR_NONE){
+        if(json_last_error() !== JSON_ERROR_NONE) {
             throw new \Mockery\CountValidator\Exception('invalid json data');
         }
         $items = $data['rgInventory'];
         $itemsTemplates = [];
-        foreach($items as $item){
+        foreach($items as $item) {
             $itemsTemplates[$item['id']] = $data['rgDescriptions'][$item['classid'] . '_' . $item['instanceid']];
             $itemsTemplates[$item['id']]['market_price'] = "999";
             $itemsTemplates[$item['id']]['actions'] = '';

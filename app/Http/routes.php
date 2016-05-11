@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/', function () {
 
 //    $class = new \App\Http\Controllers\ItemsController();
@@ -28,8 +27,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('csrf', function() {
-    return Session::token();
+//Headers: X-CSRF-TOKEN : thisTokenString
+Route::get('get_csrf', function() {
+    return [
+        'csrf' => csrf_token()
+    ];
 });
 
 Route::auth();
@@ -41,14 +43,6 @@ Route::get('/blockchain-test-api', 'Blockchain\BlockchainController@testBlockcha
 Route::get('/blockchain-test', 'Blockchain\BlockchainController@testBlockchaineCurlLocal');
 
 Route::group(['middleware' => 'auth'], function() {
-
-//    Route::resource('billing', 'BillingController');
-//
-//    Route::get('/billing', 'BillingController@index');
-//
-//    Route::get('/billing/{ID}', 'BillingController@show');
-//
-//    Route::post('/billing/store', 'BillingController@store');
 
     Route::get('/test-user', function () {
         session()->flash('msg','You have access user');
@@ -68,7 +62,7 @@ Route::group(['middleware' =>['auth','role:support']], function() {
 
 });
 
-Route::resource('options', 'OptionsController');
+
 
 Route::group(['middleware' =>['auth','role:admin']], function() {
 
@@ -80,6 +74,35 @@ Route::group(['middleware' =>['auth','role:admin']], function() {
 
 });
 
-Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
-//    Route::post('/short', 'UrlMapperController@store');
+Route::group(['prefix' => 'api'], function() {
+
+    Route::get('test',function() {
+        return Response::json(['data' => 'api'], 200, []);
+
+    });
+
+    Route::get('option/{key}', 'Api\OptionsController@getValue');
+    Route::get('options', 'Api\OptionsController@index');
+//    Route::get('items', 'Api\ItemsController@index');
+
+    Route::group(['middleware' =>['auth','role:user']], function() {
+
+    });
+
+    Route::group(['middleware' =>['auth','role:support']], function() {
+
+    });
+
+    Route::group(['middleware' =>['auth','role:admin']], function() {
+        Route::resource('billings', 'Api\BillingsController');
+        Route::resource('bots', 'Api\BotsController');
+        Route::resource('finished-billings', 'Api\FinishedBillingsController');
+        Route::resource('items-base', 'Api\FullItemsBaseController');
+//        Route::resource('items', 'Api\ItemsController', ['except' => 'index']);
+        Route::resource('items', 'Api\ItemsController');
+        Route::resource('options', 'Api\OptionsController');
+        Route::resource('steam-accounts', 'Api\SteamAccountsController');
+        Route::resource('users', 'Api\UsersController');
+    });
+
 });

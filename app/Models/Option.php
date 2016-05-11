@@ -15,15 +15,16 @@ class Option extends MainModel {
         'key' => 'string|unique:options,id|required|max:255',
         'value' => 'required'
     ];
+
     protected $fillable = ['key','value'];
 
     public static function setOption($key, $value) {
         $option = self::where('key' ,'=', $key)->first();
-        if($option){
+        if($option) {
            return $option->update(['value'=>$value]);
         }
-        $bag = new MessageBag;
-        self::$errors = $bag->add('error', 'Option not found');
+
+        self::$errors = self::$bag->add('error', 'Option not found');
         return self::errors();
     }
 
@@ -35,8 +36,8 @@ class Option extends MainModel {
     public static function getOption($key) {
 
         if(empty($key) || !is_string($key)) {
-            $bag = new MessageBag;
-            self::$errors = $bag->add('error', 'Option not found');
+
+            self::$errors = self::$bag->add('error', 'Invalid Key');
             return self::errors();
         }
 
@@ -44,7 +45,10 @@ class Option extends MainModel {
         if(isset($result->value)){
             return $result->value;
         }
-        return false;
+
+        self::$errors = self::$bag->add('error', 'Option not found');
+        return self::errors();
+
     }
 
 //    public static function getOptions($key) {

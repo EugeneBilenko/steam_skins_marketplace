@@ -10,8 +10,7 @@ class CreateOptionsTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('options', function (Blueprint $table) {
             $table->increments('id');
             $table->string('key')->unique();
@@ -27,8 +26,7 @@ class CreateOptionsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::drop('options');
     }
 }

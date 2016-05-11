@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class BlockchainController extends Controller
 {
-    public function testBlockchaineCurlLocal(){
+    public function testBlockchaineCurlLocal() {
 
         $api_code = '17074ee3-ff36-47a4-bf8c-f8d64ac53b92';
         $Blockchain = new \Blockchain\Blockchain($api_code);
@@ -30,7 +30,7 @@ class BlockchainController extends Controller
 
     }
 
-    public function testBlockchaineCurl(){
+    public function testBlockchaineCurl() {
 
         $curl = curl_init();
         $mainUrl = "https://api.blockchain.info/";

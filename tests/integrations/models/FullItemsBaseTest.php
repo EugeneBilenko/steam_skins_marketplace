@@ -11,8 +11,7 @@ class FullItemsBaseTest extends TestCase
 
     /** @test */
 
-    public function add_items()
-    {
+    public function add_items() {
         $items = \App\Models\FullItemsBase::all()->count();
 //        clm($items);
         factory(\App\Models\FullItemsBase::class, 10)->create();

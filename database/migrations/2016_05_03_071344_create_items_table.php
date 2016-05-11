@@ -10,8 +10,7 @@ class CreateItemsTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('items', function (Blueprint $table)
         {
             $table->increments('id');
@@ -36,8 +35,7 @@ class CreateItemsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::table('items', function($table)
         {
             $table->dropForeign(['user_id']);
